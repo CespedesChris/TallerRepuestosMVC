@@ -1,0 +1,57 @@
+﻿/* Set para Las PREFERENCIAS*/
+
+
+table.Claro {
+    background-color: #ffffff; /*Fondo Blanco*/
+    color: #000; /*texto negro*/
+    font-size: 25px;
+}
+
+table.Oscuro {
+    background-color: #40E0D0;
+    /*color: #f0f0f0; casi blanco*/
+    color: brown;
+    font-size: 18px;
+}
+table.Claro td, table.Oscuro td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #999;
+    color:brown;
+}
+
+
+body.Claro {
+    background-color: white;
+    color: green;
+}
+
+body.Oscuro {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+
+
+
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}

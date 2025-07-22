@@ -1,0 +1,39 @@
+﻿@model TallerRepuestosMVC.Models.Usuario
+@using System.Web.Mvc.Html
+@{
+    ViewBag.Title = "Crear";
+}
+
+<h2>Registrar Nuevo Colaborador</h2>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div style="color: green;">
+        @ViewBag.Mensaje
+    </div>
+}
+
+@using (Html.BeginForm("Crear", "Usuarios", FormMethod.Post))
+{
+    <label>Nombre</label>
+    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+
+    <label>Correo</label>
+    @Html.TextBoxFor(m => m.Correo, new { @class = "form-control" })
+
+    <label>Contraseña</label>
+    @Html.PasswordFor(m => m.Contraseña, new { @class = "form-control" })
+
+    <label>Rol</label>
+    //@Html.TextBoxFor(m => m.Rol, new { @class = "form-control" })
+
+    @Html.DropDownListFor(m => m.Rol, new List<SelectListItem>
+    { 
+        new SelectListItem { Text = "Administrador", Value = "Administrador" },
+        new SelectListItem { Text = "Mecánico", Value = "Mecánico" },
+        new SelectListItem { Text = "Bodeguero", Value = "Bodeguero" }
+    }, "-- Seleccione un Rol --", new { @class = "form-control" })
+
+    <br />
+    <input type="submit" value="Guardar" class="btn btn-primary" />
+}

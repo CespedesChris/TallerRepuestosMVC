@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Panel de Bodeguero";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bienvenido, Bodeguero</h2>
+<h2>Eres, @Session["Usuario"]</h2>
+
+<div class="menu">
+    <ul>
+
+        <li>@Html.ActionLink("Editar Perfil", "EditarPerfil", "Usuarios")</li>
+        <li>@Html.ActionLink("Preferencia de Usuario/Sesion", "Preferencias", "Usuarios")</li>
+        <li>@Html.ActionLink("Ingresar Repuesto", "Ingresar", "Repuestos")</li>
+        <li>@Html.ActionLink("Solicitar Repuesto", "Crear", "SolicitudRepuesto")</li>
+        <li>@Html.ActionLink("Solicitudes Pendientes", "SolicitudesPendientes", "SolicitudRepuesto")</li>
+        <li>@Html.ActionLink("🔔 Notificaciones", "Ver", "Notificacion")</li>
+        <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Usuarios")</li>
+
+    </ul>
+</div>

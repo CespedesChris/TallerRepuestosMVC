@@ -1,0 +1,54 @@
+﻿
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Programada 1</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+@model List<TallerRepuestosMVC.Models.SolicitudRepuesto>
+@{
+    ViewBag.Title = "Solicitudes Repuestos Pendientes";
+}
+<h2>Solicitudes Pendientes</h2>
+
+@{
+    var tema = Session["Tema"] != null ? Session["Tema"].ToString() : "Claro";
+}
+<table class="table-bordered">
+    <tr>
+        <th class="text-center">Repuesto</th>
+        <th class="text-center">Cantidad</th>
+        <th class="text-center">Solicitado Por</th>
+        <th class="text-center">Fecha</th>
+        <th class="text-center">Acción</th>
+    </tr>
+    @foreach (var s in Model.Where(s => s.Estado == "Pendiente"))
+    {
+        <tr>
+            <td>@s.NombreRepuesto</td>
+            <td>@s.CantidadSolicitada</td>
+            <td>@s.Solicitante</td>
+            <td>@s.FechaSolicitud.ToShortDateString()</td>
+
+            <td>
+                @if (s.Estado == "Pendiente")
+                {
+                    <form method="post" action="@Url.Action("Entregar", "SolicitudRepuesto")">
+                        <input type="hidden" name="id" value="@s.Id" />
+                        <button type="submit" class="btn btn-success btn-sm">Entregar</button>
+                    </form>
+                }
+                else
+                {
+                    <span class="text-success">Entregado</span>
+                }
+            </td>
+        </tr>
+    }
+</table>

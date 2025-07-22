@@ -1,0 +1,19 @@
+﻿@model TallerRepuestosMVC.Models.Usuario
+@using System.Web.Mvc.Html
+@{
+    ViewBag.Title = "Perfil";
+}
+
+<h2>Bienvenido, @Session["Usuario"]</h2>
+<p>Rol: @Session["Rol"]</p>
+<p>Correo: @Session["Correo"]</p>
+
+<a href="@Url.Action("EditarPerfil", "Usuarios")" class="btn btn-primary">Actualizar Datos</a>
+<a href="@Url.Action("CerrarSesion", "Usuarios")" class="btn btn-danger">Cerrar sesión</a>
+
+<li>@Html.ActionLink("🔔 Notificaciones", "Ver", "Notificacion")</li>
+
+
+
+
+

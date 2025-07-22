@@ -1,0 +1,40 @@
+﻿@model TallerRepuestosMVC.Models.Usuario
+@using System.Web.Mvc.Html
+@{
+    ViewBag.Title = "Iniciar Sesión";
+}
+
+<!DOCTYPE html>
+<h2>Iniciar Sesión</h2>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div style="color: red;">
+        @ViewBag.Mensaje
+    </div>
+}
+
+
+@using (Html.BeginForm("Login", "Usuarios", FormMethod.Post, new { id = "loginForm" }))
+{
+    <label>Correo:</label>
+    @Html.TextBoxFor(m => m.Correo, new { @class = "form-control", @id = "Correo" })
+
+    <label>Contraseña:</label>
+    @Html.PasswordFor(m => m.Contraseña, new { @class = "form-control", @id = "Contraseña" })
+
+    <br />
+    <input type="submit" value="Ingresar" class="btn btn-success" />
+    
+    
+    // Muestra los mensajes de error
+    <div id="MensError" style="color:red; margin-top:10px;"></div>
+}
+
+
+<script src="~/Scripts/validacionesLogin.js"></script>
+
+
+
+
+

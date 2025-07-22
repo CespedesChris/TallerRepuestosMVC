@@ -1,0 +1,42 @@
+﻿
+
+@model TallerRepuestosMVC.Models.SolicitudRepuesto
+
+@{
+    ViewBag.Title = "Solicitar Repuesto";
+}
+
+<h2>Solicitar Repuesto</h2>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.RepuestoId)
+        @Html.DropDownListFor(m => m.RepuestoId, (SelectList)ViewBag.Repuestos, "Seleccione un repuesto", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Solicitante")
+        
+        @Html.TextBoxFor(m => m.Solicitante, new { @class = "form-control", @readonly = "readonly", @Value = Session["Usuario"] })
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CantidadSolicitada)
+        @Html.TextBoxFor(m => m.CantidadSolicitada, new { @class = "form-control", type = "number", min = 1 })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+}
+<script src="~/Scripts/solicitudRepuesto.js"></script>

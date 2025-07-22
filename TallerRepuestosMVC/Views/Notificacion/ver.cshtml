@@ -1,0 +1,31 @@
+﻿@model List<TallerRepuestosMVC.Models.Notificacion>
+@{
+    ViewBag.Title = "Notificaciones";
+}
+
+<h2>Notificaciones</h2>
+@if (!Model.Any())
+{
+    <p>No tienes notificaciones nuevas.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Mensaje</th>
+            <th>Fecha</th>
+        </tr>
+        @foreach (var noti in Model)
+        {
+            <tr class="@(noti.Leido ? "" : "table-info")">
+                <td>@noti.Mensaje</td>
+                <td>@noti.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+            </tr>
+        }
+    </table>
+    using (Html.BeginForm("MarcarComoLeidas", "Notificacion", FormMethod.Post))
+    {
+        <button type="submit" class="btn btn-success">Marcar todas como leídas</button>
+    }
+
+}

@@ -1,0 +1,54 @@
+﻿@model TallerRepuestosMVC.Models.Repuesto
+@{
+    ViewBag.Title = "Ingresar Repuesto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ingresar Nuevo Repuesto</h2>
+
+
+@if (ViewBag.Mensaje != null)
+{
+
+    <div class="alert alert-info">@ViewBag.Mensaje</div>
+}
+
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formRepuesto" }))
+
+{
+    //<label>Correo:</label>
+    //@Html.TextBoxFor(m => m.Correo, new { @class = "form-control", @id = "Correo" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nombre)
+        @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Nombre)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Descripcion)
+        @Html.TextAreaFor(m => m.Descripcion, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Cantidad)
+        @Html.TextBoxFor(m => m.Cantidad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Cantidad)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Precio)
+        @Html.TextBoxFor(m => m.Precio, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Precio)
+    </div>
+    <div id="mensajeError" style="color:red; display:none; margin-bottom:10px;"></div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+
+
+}
+<script src="~/Scripts/validarRepuesto.js"></script>
+
+
+

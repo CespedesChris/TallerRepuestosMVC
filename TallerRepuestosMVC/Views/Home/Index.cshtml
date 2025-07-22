@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "PAGINA PRINCIPAL";
+}
+
+<main>
+    <section class="row text-center" aria-labelledby="aspnetTitle">
+        <h1 id="title">Proyecto Taller de Repuestos</h1>
+        <p class="lead text-center">Aplicación web para la bodega de repuestos de un taller automotriz</p>
+        
+    </section>
+
+        <section class="row text-center" aria-labelledby="gettingStartedTitle">
+            <h2 id="gettingStartedTitle">INICIAR SESIÓN </h2>
+            <p>
+                @using (Html.BeginForm("Perfil", "Usuarios", FormMethod.Post, new { @class = "text-center", style = "margin-top: 20px;" }))
+                {
+                    <button type="submit" class="btn btn-primary btn-lg">INICIO SESION</button>
+                }
+            </p>
+        </section>
+</main>

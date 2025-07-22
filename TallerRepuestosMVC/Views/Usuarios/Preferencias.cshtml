@@ -1,0 +1,29 @@
+﻿@using System.Web.Mvc.Html
+@model TallerRepuestosMVC.Models.Usuario
+@{
+    ViewBag.Title = "Preferencias";
+}
+<h2>Preferencias de Usuario</h2>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div style="color: green;">@ViewBag.Mensaje</div>
+}
+
+@using (Html.BeginForm("Preferencias", "Usuarios", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+
+    <label>Seleccionar tema:</label>
+    <br />
+    <input type="radio" id="tmClaro" name="tema" value="Claro" @(ViewBag.Tema == "Claro" ? "checked" : "") />
+    <label for="tmClaro">Claro</label>
+    <br />
+    <input type="radio" id="tmOscuro" name="tema" value="Oscuro" @(ViewBag.Tema == "Oscuro" ? "checked" : "") />
+    <label for="tmOscuro">Oscuro</label>
+    <br />
+    <br />
+
+    <input type="submit" value="Guardar preferencias" class="btn btn-primary" />
+}
+
