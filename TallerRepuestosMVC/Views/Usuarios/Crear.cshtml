@@ -1,4 +1,17 @@
-﻿@model TallerRepuestosMVC.Models.Usuario
+﻿<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Programada 1</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+
+@model TallerRepuestosMVC.Models.Usuario
 @using System.Web.Mvc.Html
 @{
     ViewBag.Title = "Crear";
@@ -7,13 +20,13 @@
 <h2>Registrar Nuevo Colaborador</h2>
 
 @if (ViewBag.Mensaje != null)
-{
+{   
     <div style="color: green;">
         @ViewBag.Mensaje
     </div>
 }
 
-@using (Html.BeginForm("Crear", "Usuarios", FormMethod.Post))
+@using (Html.BeginForm("Crear", "Usuarios", FormMethod.Post, new { id = "formCrear" }))
 {
     <label>Nombre</label>
     @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
@@ -22,13 +35,13 @@
     @Html.TextBoxFor(m => m.Correo, new { @class = "form-control" })
 
     <label>Contraseña</label>
-    @Html.PasswordFor(m => m.Contraseña, new { @class = "form-control" })
+    @Html.PasswordFor(m => m.Contraseña, new { @class = "form-control", @id = "Contraseña" })
 
     <label>Rol</label>
     //@Html.TextBoxFor(m => m.Rol, new { @class = "form-control" })
 
     @Html.DropDownListFor(m => m.Rol, new List<SelectListItem>
-    { 
+    {
         new SelectListItem { Text = "Administrador", Value = "Administrador" },
         new SelectListItem { Text = "Mecánico", Value = "Mecánico" },
         new SelectListItem { Text = "Bodeguero", Value = "Bodeguero" }
@@ -36,4 +49,39 @@
 
     <br />
     <input type="submit" value="Guardar" class="btn btn-primary" />
+
+    <div id="MensError" style="color: red;"></div>
 }
+
+@{
+    var tema = Session["Tema"] != null ? Session["Tema"].ToString() : "Claro";
+}
+
+@if (ViewBag.Usuarios != null)
+{
+    <h3>Usuarios Registrados</h3>
+    <table class="table table-bordered table-striped @tema">
+        
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Contraseña</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in (List<TallerRepuestosMVC.Models.Usuario>)ViewBag.Usuarios)
+                {
+                    <tr>
+                        <td>@u.Nombre</td>
+                        <td>@u.Correo</td>
+
+                        <td>@(new string('*', u.Contraseña.Length))</td>
+                        <td>@u.Rol</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+  }
+        <script src="~/Scripts/Validaciones/ValidacionesCrearUsuario.js"></script>

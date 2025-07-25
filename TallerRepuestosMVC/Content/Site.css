@@ -1,25 +1,22 @@
-﻿/* Set para Las PREFERENCIAS*/
+﻿
 
-
+/* Set para Las PREFERENCIAS*/
 table.Claro {
-    background-color: #ffffff; /*Fondo Blanco*/
+    background-color: #FFFF00; /*amarillo*/
     color: #000; /*texto negro*/
     font-size: 25px;
 }
 
 table.Oscuro {
     background-color: #40E0D0;
-    /*color: #f0f0f0; casi blanco*/
     color: brown;
     font-size: 18px;
 }
 table.Claro td, table.Oscuro td {
     padding: 10px;
     text-align: center;
-    border: 1px solid #999;
-    color:brown;
+    border: 1px solid #999;   
 }
-
 
 body.Claro {
     background-color: white;
@@ -27,12 +24,9 @@ body.Claro {
 }
 
 body.Oscuro {
-    background-color: #1a1a1a;
+    background-color:darkgray;
     color: white;
 }
-
-
-
 
 
 /* Set padding to keep content from hitting the edges */

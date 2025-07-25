@@ -1,7 +1,23 @@
-﻿@model TallerRepuestosMVC.Models.Repuesto
+﻿<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Programada 1</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+
+
+
+@model TallerRepuestosMVC.Models.Repuesto
+@using System.Web.Mvc.Html
 @{
     ViewBag.Title = "Ingresar Repuesto";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Ingresar Nuevo Repuesto</h2>
@@ -48,7 +64,35 @@
 
 
 }
+
+@{
+    var tema = Session["Tema"] != null ? Session["Tema"].ToString() : "Claro";
+}
+
+@if (ViewBag.Repuestos != null)
+{ 
+    <h2>Repuestos Disponibles</h2>
+    <table class="table table-bordered @tema">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rep in (List<TallerRepuestosMVC.Models.Repuesto>)ViewBag.Repuestos)
+
+        {
+            <tr>
+                <td>@rep.Nombre</td>
+                <td>@rep.Descripcion</td>
+                <td>@rep.Cantidad</td>
+                <td>₡@rep.Precio.ToString("N2")</td>
+            </tr>
+        }
+    </tbody>
+    </table>
+}
 <script src="~/Scripts/validarRepuesto.js"></script>
-
-
-

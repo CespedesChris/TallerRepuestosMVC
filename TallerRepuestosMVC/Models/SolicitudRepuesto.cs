@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,7 @@ namespace TallerRepuestosMVC.Models
     {
         public int Id { get; set; }
         public int RepuestoId { get; set; }
-        public string NombreRepuesto { get; set; } 
+        public string NombreRepuesto { get; set; }
         public int CantidadSolicitada { get; set; }
         public DateTime FechaSolicitud { get; set; }
         public string Estado { get; set; }

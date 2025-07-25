@@ -8,10 +8,12 @@ using TallerRepuestosMVC.Models;
 
 namespace TallerRepuestosMVC.Controllers
 {
+
     public class UsuariosController : Controller
     {
+
         // PREFERENCIAS DEL USUARIO
-       
+
         public ActionResult Preferencias()
         {
             if (Session["Correo"] == null) return RedirectToAction("Login");
@@ -141,8 +143,11 @@ namespace TallerRepuestosMVC.Controllers
         private UsuarioDAL usuarioDAL = new UsuarioDAL();
         public ActionResult Crear()
         {
+            var usuarios = usuarioDAL.ObtenerTodos(); // Este método lo agregás abajo
+            ViewBag.Usuarios = usuarios;
             return View();
         }
+
 
         [HttpPost]
         public ActionResult Crear(Usuario usuario)
@@ -160,6 +165,9 @@ namespace TallerRepuestosMVC.Controllers
                     ViewBag.Mensaje = "Hubo un error al ingresar usuario";
                 }
             }
+            // Siempre recargar la lista
+            ViewBag.Usuarios = usuarioDAL.ObtenerTodos();
+
             return View();
         }
     }

@@ -1,37 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using TallerRepuestosMVC.DAL;
-using TallerRepuestosMVC.Models;
+﻿    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
+    using TallerRepuestosMVC.DAL;
+    using TallerRepuestosMVC.Models;
 
-namespace TallerRepuestosMVC.Controllers
-{
-    public class RepuestosController : Controller
+    namespace TallerRepuestosMVC.Controllers
     {
-
-        public ActionResult Ingresar()
+        public class RepuestosController : Controller
         {
-            if (Session["Correo"] == null) return RedirectToAction("Login", "Usuarios");
-            return View();
-        }
 
-
-        [HttpPost]
-        public ActionResult Ingresar(Repuesto r)
-        {
-            if (!ModelState.IsValid)
+            //LISTAR REPUESTOS INGRESADOS EN BD
+            public ActionResult Listar()
             {
-                ViewBag.Mensaje = "Por favor revise los datos.";
-                return View(r);
+                if (Session["Correo"] == null) return RedirectToAction("Login", "Usuarios");
+
+                RepuestoDAL dal = new RepuestoDAL();
+                var lista = dal.ObtenerTodos();
+                return View(lista);
             }
 
-            RepuestoDAL dal = new RepuestoDAL();
-            bool ok = dal.InsertarRepuesto(r);
-            ViewBag.Mensaje = ok ? "Repuesto ingresado exitosamente." : "Error al guardar el repuesto.";
-            return View();
-        }
 
+
+            public ActionResult Ingresar()
+            {
+                if (Session["Correo"] == null) return RedirectToAction("Login", "Usuarios");
+            RepuestoDAL dal = new RepuestoDAL();
+            ViewBag.Repuestos = dal.ObtenerTodos();
+            return View();
+            }
+
+
+            [HttpPost]
+            public ActionResult Ingresar(Repuesto r)
+            {
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.Mensaje = "Por favor revise los datos.";
+                // Recargar la lista de repuestos para que no esté vacía al renderizar la tabla
+                RepuestoDAL dalError = new RepuestoDAL();
+                ViewBag.Repuestos = dalError.ObtenerTodos();
+                return View(r);
+                }
+
+                RepuestoDAL dal = new RepuestoDAL();
+                bool ok = dal.InsertarRepuesto(r);
+                ViewBag.Mensaje = ok ? "Repuesto ingresado exitosamente." : "Error al guardar el repuesto.";
+                 // Volver a cargar la lista actualizada de repuestos
+                 ViewBag.Repuestos = dal.ObtenerTodos();
+
+
+            return View();
+            }
+
+        }
     }
-}

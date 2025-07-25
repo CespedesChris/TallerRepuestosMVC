@@ -12,6 +12,40 @@ namespace TallerRepuestosMVC.DAL
     {
         private string conexion = ConfigurationManager.ConnectionStrings["BDTallerRepuestos"].ConnectionString;
 
+        //MÉTODO PARA OBTENER TODOS USUARIOS
+
+        public List<Usuario> ObtenerTodos()
+        {
+            List<Usuario> lista = new List<Usuario>();
+
+            using (SqlConnection conn = new SqlConnection(conexion))
+            {
+                string sql = "SELECT * FROM Usuarios";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Usuario usuario = new Usuario
+                    {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Nombre = reader["Nombre"].ToString(),
+                        Correo = reader["Correo"].ToString(),
+                        Contraseña = reader["Contraseña"].ToString(),
+                        Rol = reader["Rol"].ToString()
+                    };
+                    lista.Add(usuario);
+                }
+            }
+
+            return lista;
+        }
+
+
+
+
+
         //MÉTODO PARA ACTUALIZAR PERFIL
         public bool ActualizarPerfil(Usuario u)
         {

@@ -23,6 +23,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.RepuestoId)
         @Html.DropDownListFor(m => m.RepuestoId, (SelectList)ViewBag.Repuestos, "Seleccione un repuesto", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.RepuestoId)
     </div>
 
     <div class="form-group">
@@ -35,6 +36,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.CantidadSolicitada)
         @Html.TextBoxFor(m => m.CantidadSolicitada, new { @class = "form-control", type = "number", min = 1 })
+        @Html.ValidationMessageFor(model => model.CantidadSolicitada)
     </div>
 
     <button type="submit" class="btn btn-primary">Enviar Solicitud</button>

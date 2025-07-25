@@ -30,6 +30,9 @@ namespace TallerRepuestosMVC.DAL
                     Repuesto r = new Repuesto();
                     r.Id = Convert.ToInt32(rdr["Id"]);
                     r.Nombre = rdr["Nombre"].ToString();
+                    r.Descripcion = rdr["Descripcion"].ToString();
+                    r.Cantidad = Convert.ToInt32(rdr["Cantidad"]);
+                    r.Precio = Convert.ToDecimal(rdr["Precio"]);
                     lista.Add(r);
                 }
             }

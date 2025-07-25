@@ -20,7 +20,7 @@
 @{
     var tema = Session["Tema"] != null ? Session["Tema"].ToString() : "Claro";
 }
-<table class="table-bordered">
+<table class="table table-bordered @tema">
     <tr>
         <th class="text-center">Repuesto</th>
         <th class="text-center">Cantidad</th>

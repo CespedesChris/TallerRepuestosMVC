@@ -38,7 +38,11 @@ namespace TallerRepuestosMVC.Controllers
         [HttpPost]
         public ActionResult Crear(SolicitudRepuesto solicitud)
         {
-
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Repuestos = new SelectList(RepuestoDAL.ObtenerTodos(), "Id", "Nombre");
+                return View(solicitud);
+            }
             // Obtener el ID del usuario desde la sesión Login (NUEVO)
             if (Session["UsuarioId"] != null)
             {
@@ -50,10 +54,24 @@ namespace TallerRepuestosMVC.Controllers
                 return RedirectToAction("Crear");
             }
 
+            //VALIDACIONES MANUALES ANTES DE USAR EL DAL
+            if (solicitud.RepuestoId <= 0)
+            {
+                ModelState.AddModelError("RepuestoId", "Debe seleccionar un repuesto válido.");
+            }
 
+            if (solicitud.CantidadSolicitada <= 0)
+            {
+                ModelState.AddModelError("CantidadSolicitada", "Debe ingresar una cantidad mayor a cero.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Repuestos = new SelectList(RepuestoDAL.ObtenerTodos(), "Id", "Nombre");
+                return View(solicitud);
+            }
 
             // Validar disponibilidad
-
             int disponible = solicitudDAL.ObtenerCantidadDisponible(solicitud.RepuestoId);
 
             if (solicitud.CantidadSolicitada <= disponible)
